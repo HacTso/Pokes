@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+        <title>Pokes</title>
+    </head>
+    <style>
+    table, th, td {
+    border: 1px solid black;
+    }
+    #info{
+        border: 1px solid black;
+        width: 300px;
+    }
+    </style>
+    <body>
+        <a href="/logout">Logout</a>
+        <h1>Welcome, {{ name }}</h1>
+        <p>{{ how_many }} peoeple poked you!</p>
+        <div id="info">
+        {% for info in allinfo %}
+        <p>{{ info.name }} poked you {{ info.num }} times</p>
+        {% endfor %}
+        </div>
+
+
+        <p>Peole you may want to poke:</p>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Alias</th> 
+                <th>Email</th>
+                <th>Poke History</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for user in other_users %}
+                <tr>
+                    <th>{{ user.name }}</th>
+                    <th>{{ user.alias }}</th> 
+                    <th>{{ user.email }}</th>
+                    <th>{{ user.pokes_sent_to.all.count }}</th>
+                    <th><a href="/make_poke/{{ user.id }}/{{ request.session.id }}">Poke!</a></th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </body>
+</html>
